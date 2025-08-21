@@ -1,0 +1,25 @@
+.main-nav {
+  padding: 1rem;
+  background-color: var(--background-light);
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.main-nav a:hover {
+  color: var(--text-primary);
+}
+
+.main-nav a.active-link {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}

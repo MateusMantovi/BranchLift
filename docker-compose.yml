@@ -1,0 +1,59 @@
+services:
+  branchlift-backend:
+    build:
+      context: ./branchlift-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://branchlift-db:5432/branchlift_db
+      SPRING_DATASOURCE_USERNAME: branchlift_user
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      branchlift-db:
+        condition: service_healthy
+    networks:
+      - branchlift-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # A LINHA ABAIXO É A CORREÇÃO CRUCIAL
+      - ./branchlift-data:/tmp
+    restart: unless-stopped
+
+  branchlift-frontend:
+    build:
+      context: ./branchlift-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - branchlift-backend
+    networks:
+      - branchlift-network
+    restart: unless-stopped
+
+  branchlift-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: branchlift_db
+      POSTGRES_USER: branchlift_user
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - branchlift-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U branchlift_user -d branchlift_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+
+networks:
+  branchlift-network:

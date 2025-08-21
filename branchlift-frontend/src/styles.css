@@ -1,0 +1,68 @@
+/* 1. Importa a nova fonte do Google Fonts (PRECISA ser a primeira linha) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* 2. Importa o tema base do Angular Material */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* 3. Define nossa paleta de cores e variáveis globais */
+:root {
+  --background-dark: #121829; /* Azul bem escuro */
+  --background-light: #1E293B; /* Azul-ardósia escuro */
+  --primary-color: #387eff;
+  --text-primary: #F1F5F9; /* Branco suave */
+  --text-secondary: #94A3B8; /* Cinza-azulado claro */
+  --border-color: #334155; /* Cinza-azulado para bordas */
+}
+
+/* 4. Aplica estilos base e a nova fonte */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif; /* Nova fonte aplicada */
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+}
+
+/* 5. Estiliza a barra de rolagem para o tema escuro */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-dark);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--background-light);
+  border-radius: 4px;
+  border: 2px solid var(--background-dark);
+}
+
+/* 6. Ajustes globais para componentes do Angular Material */
+.mat-mdc-card {
+  background-color: var(--background-light) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-mdc-form-field-outline-thick {
+  color: var(--border-color) !important;
+}
+
+/* 7. Estilos adicionais para tabelas e formulários */
+
+/* Tabela do Angular Material */
+.mat-mdc-table {
+  background-color: var(--background-light) !important;
+}
+
+.mat-mdc-header-row {
+  background-color: #2a3a52; /* Azul-ardósia mais claro para destaque */
+}
+
+.mat-mdc-header-cell {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+}
+
+/* Aparência dos formulários */
+.mat-mdc-form-field-error {
+  color: #f44336 !important; /* Garante visibilidade do erro */
+}

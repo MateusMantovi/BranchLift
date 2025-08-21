@@ -1,0 +1,10 @@
+<svg width="200" height="50" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 10 40 Q 20 40, 25 30 T 40 25" />
+    <path d="M 25 30 L 25 15" />
+    <path d="M 22 18 L 25 15 L 28 18" />
+  </g>
+  <text x="50" y="32" font-family="Poppins, sans-serif" font-size="24" font-weight="600" fill="currentColor">
+    BranchLift
+  </text>
+</svg>

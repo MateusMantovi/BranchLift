@@ -1,0 +1,52 @@
+.container {
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: auto;
+}
+header { margin-bottom: 2rem; }
+header h1 { color: var(--text-primary); font-size: 2rem; margin: 0; }
+header p { color: var(--text-secondary); margin-top: 0.5rem; }
+
+.form-card {
+  margin-bottom: 2rem;
+}
+
+.provision-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.provision-form button {
+  padding: 1.5rem 1rem;
+}
+
+.table-container {
+  overflow: auto; /* Adiciona scroll horizontal em telas pequenas */
+}
+
+table {
+  width: 100%;
+  min-width: 800px; /* Evita que a tabela quebre em telas muito pequenas */
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 12px 16px;
+  white-space: nowrap; /* Impede que o conteúdo quebre linha */
+}
+
+.spinner-container, .empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  color: var(--text-secondary);
+}
+
+.status-spinner {
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}

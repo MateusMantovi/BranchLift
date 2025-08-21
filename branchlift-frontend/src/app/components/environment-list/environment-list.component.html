@@ -1,0 +1,104 @@
+<div class="container">
+  <header>
+    <h1>Dashboard de Ambientes</h1>
+    <p>Provisione e gerencie ambientes de desenvolvimento a partir de branches Git.</p>
+  </header>
+
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="provisionForm" (ngSubmit)="onProvisionSubmit()" class="provision-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Selecione o Projeto</mat-label>
+          <mat-select formControlName="projectId">
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+              {{project.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Branch Git</mat-label>
+          <input matInput formControlName="gitBranch" placeholder="ex: feature/new-login">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Criado Por</mat-label>
+          <input matInput formControlName="createdBy">
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!provisionForm.valid">
+          <mat-icon>add_circle</mat-icon>
+          Provisionar
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Ambientes Ativos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="table-container">
+      <div *ngIf="isLoading && environments.length === 0" class="spinner-container">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+
+      <table mat-table [dataSource]="environments" *ngIf="!isLoading || environments.length > 0">
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-chip-listbox>
+              <mat-chip [color]="getStatusColor(element.status)" selected>
+                {{ element.status }}
+                <mat-progress-spinner *ngIf="element.status === 'PROVISIONING'" diameter="20" mode="indeterminate" class="status-spinner"></mat-progress-spinner>
+              </mat-chip>
+            </mat-chip-listbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="projectName">
+          <th mat-header-cell *matHeaderCellDef>Projeto</th>
+          <td mat-cell *matCellDef="let element">{{ element.project.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="gitBranch">
+          <th mat-header-cell *matHeaderCellDef>Branch</th>
+          <td mat-cell *matCellDef="let element">{{ element.gitBranch }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="accessUrl">
+          <th mat-header-cell *matHeaderCellDef>URL de Acesso</th>
+          <td mat-cell *matCellDef="let element">
+            <a *ngIf="element.accessUrl" [href]="element.accessUrl" target="_blank">{{ element.accessUrl }}</a>
+            <span *ngIf="!element.accessUrl">-</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef>Criado Por</th>
+          <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Data Criação</th>
+          <td mat-cell *matCellDef="let element">{{ element.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" title="Destruir Ambiente" (click)="deleteEnvironment(element.id)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div *ngIf="!isLoading && environments.length === 0" class="empty-state">
+        <h3>Nenhum ambiente encontrado.</h3>
+        <p>Use o formulário acima para provisionar seu primeiro ambiente.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
