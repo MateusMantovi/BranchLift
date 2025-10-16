@@ -27,7 +27,7 @@ Esta plataforma foi construída com tecnologias modernas e robustas, focando em 
 
 | Camada              | Tecnologia                                                | Propósito                                                   |
 | ------------------- | --------------------------------------------------------- | ----------------------------------------------------------- |
-| **Backend** | Java 21, Spring Boot 3, Spring Data JPA                   | Lógica de negócio, orquestração de comandos e exposição de API |
+| **Backend** | Java 21, Spring Boot 3.5.4, Spring Data JPA                   | Lógica de negócio, orquestração de comandos e exposição de API |
 | **Frontend** | Angular 20 (Standalone Components), TypeScript, RxJS      | Interface reativa, comunicação com o backend e dashboard     |
 | **Banco de Dados** | PostgreSQL                                                | Persistência do estado dos projetos e ambientes             |
 | **Containerização** | Docker & Docker Compose                                   | Empacotamento, isolamento e execução dos ambientes          |
